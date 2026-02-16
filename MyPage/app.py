@@ -1,6 +1,11 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
+from forms import RegisterForm
+
+
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "SJQKJS1320UWEWSWjkusop@"
+
 
 names = [
     {"id":0, "name": "შოთა", "surname": "რუსთაველი", "ფასი": "68 ლარი", "img":"shotaOqro.jpg.jpeg"},
@@ -14,14 +19,31 @@ names = [
 
 ]
 
+users = [
+
+]
 
 @app.route('/')
 def home():
-    return render_template("home.html",names=names)
+    return render_template("home.html",users=users, names=names)
 
-@app.route('/register')
+@app.route('/register', methods=["GET", "POST"])
 def register():
-    return render_template("register.html")
+    form = RegisterForm()
+    if form.validate_on_submit():
+        users.append(
+            {
+                "username": form.username.data,
+                "birthday": form.birthday.data,
+                "gender": form.gender.data,
+                "country": form.country.data
+            }
+        )
+
+    else:
+        print(form.errors)
+    print(form.username.data)
+    return render_template("register.html", form = form)
 
 @app.route('/about')
 def about():
@@ -30,6 +52,7 @@ def about():
 @app.route('/view_names/<int:names_id>')
 def view_names(names_id):
     return render_template("view_names.html",name=names[names_id])
+
 
 
 
