@@ -5,61 +5,28 @@
 
 
 <div class = "container-md py-3 px-4 shadow border border-success border-2 border rounded-3 d-flex justify-content-center">
-    <div class="w-50">
-        <div class="mb-1">
-          <label for="username" class="form-label">სახელი</label>
-          <input type="text" class="form-control" id="username" placeholder="გთხოვთ მიუთითეთ სახელი">
-        </div>
+    <form class="w-50" method ="post">
+        {% for errors in form.errors.values() %}
+            {% for error in errors %}
+        <p class = "text-danger"> * {{error}} </p>
+            {% endfor %}
 
-        <div class="mb-1">
-          <label for="password" class="form-label">პაროლი</label>
-          <input type="text" class="form-control" id="password" placeholder="გთხოვთ შეიყვანოთ პაროლი">
-        </div>
+        {% endfor %}
 
-        <div class="mb-1">
-          <label for="date" class="form-label">თარიღი</label>
-          <input type="date" class="form-control" id="date" placeholder="">
-        </div>
+        {{ form.hidden_tag() }}
 
-        <div class ="mb-1">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="maleGender">
-              <label class="form-check-label" for="maleGender">
-                მამაკაცი
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="femaleGender" checked>
-              <label class="form-check-label" for="femaleGender">
-                ქალბატონი
-              </label>
-            </div>
-        </div>
+        {{ form.username(placeholder = form.username.label.text, class = "form-control")}}
+        {{ form.password(placeholder = form.password.label.text, class = "form-control mt-2")}}
+        {{ form.repeat_password(placeholder = form.repeat_password.label.text, class = "form-control mt-2")}}
 
-        <div class="mb-1">
-            <select class="form-select" aria-label="Select Country">
-              <option selected>აირჩიეთ რეგიონი</option>
-              <option value="1">თბილისი</option>
-              <option value="2">ქუთაისი</option>
-              <option value="3">ბათუმი</option>
-                <option value="3">რუსთავი</option>
-                <option value="3">სხვა</option>
-            </select>
-        </div>
+        {{ form.birthday(class = "form-control mt-2") }}
+        {{ form.country(class = "form-select mt-2") }}
 
+        {{ form.gender(class = "mt-2 ") }}
 
+        {{ form.submit(class = "btn btn-primary mt-2")}}
 
-        <div class="mb-1">
-            <textarea placeholder="თქვენს შესახებ:" class="Form-control"></textarea>
-
-        </div>
-
-        <button type="button" class="btn btn-outline-success">Register</button>
-        <button type="button" class="btn btn-outline-danger">Cancel</button>
-
-
-
-    </div>
+    </form>
 
 
 
