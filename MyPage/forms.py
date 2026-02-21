@@ -3,6 +3,7 @@ from wtforms.fields import (StringField, PasswordField, SubmitField, DateField, 
                             SelectField)
 from wtforms.validators import DataRequired, length, equal_to, ValidationError
 from string import ascii_uppercase, digits, ascii_lowercase,punctuation
+from flask_wtf.file import FileField, FileRequired, FileAllowed, FileSize
 
 
 
@@ -28,6 +29,10 @@ class RegisterForm(FlaskForm):
         "ვანი",
         "ბათუმი"
     ], validators = [DataRequired()])
+
+    profile_image = FileField("Upload Profile Image", validators =[FileSize(1024 * 1024), FileAllowed(['jpg', 'png', 'jpeg'])])
+    submit = SubmitField("Register")
+
 
     def validate_password(self, field):
         contains_uppercase = False
