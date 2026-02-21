@@ -1,11 +1,14 @@
 from flask import Flask, render_template
 from forms import RegisterForm
+from os import path
+from uuid import uuid4
+
 
 
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "SJQKJS1320UWEWSWjkusop@"
-
+UPLOAD_PATH = path.join(app.root_path, "static", "uploads")
 
 names = [
     {"id":0, "name": "შოთა", "surname": "რუსთაველი", "ფასი": "68 ლარი", "img":"shotaOqro.jpg.jpeg"},
@@ -39,6 +42,11 @@ def register():
                 "country": form.country.data
             }
         )
+
+        file = form.profile_image.data
+        _, extension = path.splitext(file.filename)
+        filename = f"{uuid4()}{extension}"
+        file.save(path.join(UPLOAD_PATH, file.filename))
 
     else:
         print(form.errors)
