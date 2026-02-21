@@ -46,7 +46,7 @@ def register():
         file = form.profile_image.data
         _, extension = path.splitext(file.filename)
         filename = f"{uuid4()}{extension}"
-        file.save(path.join(UPLOAD_PATH, file.filename))
+        file.save(path.join(UPLOAD_PATH, filename))
 
     else:
         print(form.errors)
