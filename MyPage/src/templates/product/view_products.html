@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content%}
+
+<div class="container-md py-3 px-4 w-50 shadow border border-2 rounded-3 mx-auto">
+    <img src="/static/uploads/{{ product.img }}" class="img-fluid d-block mx-auto mb-3" alt="image">
+
+    <table class="table table-sm mb-0">
+        <tr>
+            <th>სახელი:</th>
+            <td>{{ product.name }} {{ product.surname }}</td>
+        </tr>
+        <tr>
+            <th>ფასი:</th>
+            <td>{{ product.price }}</td>
+        </tr>
+    </table>
+</div>
+
+
+{% endblock %}
