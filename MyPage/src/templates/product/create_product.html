@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+   <div class = "container-md py-3 px-4 shadow border border-success border-2 border rounded-3 d-flex justify-content-center">
+       <form method="POST" enctype = "multipart/form-data">
+           {{ form.hidden_tag() }}
+
+           <div class = "mb-1">
+               {{ form.name.label }}
+               {{ form.name(class = "form_control") }}
+           </div>
+
+           <div class = "mb-1">
+               {{ form.surname.label }}
+               {{ form.surname(class = "form_control") }}
+           </div>
+
+           <div class = "mb-1">
+               {{ form.price.label }}
+               {{ form.price(class = "form_control") }}
+           </div>
+
+           <div class = "mb-1">
+               {{ form.img.label }}
+               {{ form.img(class = "form_control") }}
+           </div>
+
+           {{ form.submit(class ="btn btn-success mt-2")}}
+
+
+
+
+
+
+       </form>
+
+   </div>
+{% endblock %}
