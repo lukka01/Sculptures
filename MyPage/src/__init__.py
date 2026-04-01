@@ -1,9 +1,10 @@
 from flask import Flask
 
 from MyPage.src.views import main_blueprint, auth_blueprint, product_blueprint
-from MyPage.src.ext import db, migrate
+from MyPage.src.ext import db, migrate, login_manager
 from MyPage.src.config import Config
 from MyPage.src.commands import init_db, populate_db
+from MyPage.src.models import User
 
 BLUE_PRINTS = [auth_blueprint, main_blueprint, product_blueprint]
 
@@ -32,6 +33,15 @@ def register_extensions(app):
 
     #Flask migrate
     migrate.init_app(app, db)
+
+    #Flask_login
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+
+
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(id)
 
 def register_commands(app):
     for command in COMMANDS:
