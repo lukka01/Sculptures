@@ -1,4 +1,6 @@
 from flask import render_template,redirect,url_for,Blueprint
+from flask_login import login_required,current_user
+
 from os import path
 from uuid import uuid4
 
@@ -21,6 +23,7 @@ def view_products(product_id):
     return render_template("product/view_products.html", product=product)
 
 @product_blueprint.route('/create_product/', methods=['GET', 'POST'])
+@login_required
 def create_product():
     form = ProductForm()
     if form.validate_on_submit():
@@ -43,6 +46,7 @@ def create_product():
 
 
 @product_blueprint.route('/edit_product/<int:product_id>', methods=['GET', 'POST'])
+@login_required
 def edit_product(product_id):
     product = Product.query.get(product_id)
     form = ProductForm(obj=product)
@@ -68,6 +72,7 @@ def edit_product(product_id):
 
 
 @product_blueprint.route('/delete_product/<int:product_id>')
+@login_required
 def delete_product(product_id):
     products = Product.query.get(product_id)
     products.delete()

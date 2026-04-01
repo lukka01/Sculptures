@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content %}
+
+
+<div class = "container-md py-3 px-4 shadow border border-success border-2 border rounded-3 d-flex justify-content-center">
+    <form class="w-50" method ="post" >
+        {% for errors in form.errors.values() %}
+            {% for error in errors %}
+        <p class = "text-danger"> * {{error}} </p>
+            {% endfor %}
+
+        {% endfor %}
+
+        {{ form.hidden_tag() }}
+
+        {{ form.username(placeholder = form.username.label.text, class = "form-control")}}
+        {{ form.password(placeholder = form.password.label.text, class = "form-control mt-2")}}
+
+
+        {{ form.login(class = "btn btn-primary mt-2")}}
+
+    </form>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
+
+{% endblock %}

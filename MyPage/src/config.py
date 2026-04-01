@@ -2,6 +2,7 @@ from os import path
 
 
 
+
 class Config(object):
 
     SECRET_KEY = "SJQKJS1320UWEWSWjkusop@"
