@@ -1,10 +1,12 @@
 from flask import Flask
 
 from MyPage.src.views import main_blueprint, auth_blueprint, product_blueprint
-from MyPage.src.ext import db, migrate, login_manager
+from MyPage.src.ext import db, migrate, login_manager, admin
 from MyPage.src.config import Config
 from MyPage.src.commands import init_db, populate_db
-from MyPage.src.models import User
+from MyPage.src.models import User, Product
+from MyPage.src.admin_views.base import SecureModelView
+
 
 BLUE_PRINTS = [auth_blueprint, main_blueprint, product_blueprint]
 
@@ -42,6 +44,11 @@ def register_extensions(app):
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(id)
+
+    #Flask admin
+    admin.init_app(app)
+    admin.add_view(SecureModelView(Product, db.session))
+    admin.add_view(SecureModelView(User, db.session))
 
 def register_commands(app):
     for command in COMMANDS:
