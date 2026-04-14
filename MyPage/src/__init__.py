@@ -6,6 +6,7 @@ from MyPage.src.config import Config
 from MyPage.src.commands import init_db, populate_db
 from MyPage.src.models import User, Product
 from MyPage.src.admin_views.base import SecureModelView
+from MyPage.src.admin_views.product import ProductView
 
 
 BLUE_PRINTS = [auth_blueprint, main_blueprint, product_blueprint]
@@ -47,7 +48,7 @@ def register_extensions(app):
 
     #Flask admin
     admin.init_app(app)
-    admin.add_view(SecureModelView(Product, db.session))
+    admin.add_view(ProductView(Product, db.session))
     admin.add_view(SecureModelView(User, db.session))
 
 def register_commands(app):
