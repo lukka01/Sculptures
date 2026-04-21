@@ -5,17 +5,21 @@ from MyPage.src.admin_views.utils import generate_filename
 from MyPage.src.config import Config
 from flask_admin.form import ImageUploadField
 
+
 class ProductView(SecureModelView):
+
     create_modal = True
     edit_modal = True
-    column_editable_list = ("price",)
-    details_modals = True
-    column_labels  = {
+
+    details_modal = True
+
+    column_labels = {
         'price': 'ფასი',
         'name': 'სახელი',
         'surname': 'გვარი',
-        'img': 'სუართი'
+        'img': 'სურათი'
     }
+
 
     column_searchable_list = ("name","img")
     column_filters = ("price",)
