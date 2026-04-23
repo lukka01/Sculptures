@@ -31,7 +31,7 @@ class ProductView(SecureModelView):
     form_overrides = {"img": ImageUploadField}
     form_args = {"img": {
         "base_path": Config.UPLOAD_PATH,
-        "name_gen": generate_filename
+        "namegen": generate_filename
 
     }}
 
